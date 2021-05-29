@@ -9,32 +9,36 @@ public class karakter : MonoBehaviour
     public bool yerde, ziplayabilir;
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>(); // rigidbody'nin tanımlanması
     }
     private void Update()
     {
-        input = Input.GetAxis("Horizontal");
-        if (Input.GetKeyDown(KeyCode.Space) && yerde == true) ziplayabilir = true;
+        input = Input.GetAxis("Horizontal"); // unity kütüphanesinden girdi alıyoruz. Durunca 0, sağa gidince 1, sola gidince -1.
+        if (Input.GetKeyDown(KeyCode.Space) && yerde == true) ziplayabilir = true; // kullanıcıdan girdi alıyoruz
     }
     private void FixedUpdate()
     {
+        // hareket kodu
         transform.position += new Vector3(input, 0, 0) * hiz * Time.deltaTime;
         karakteriDondur();
+        // ziplama kodu
         if (ziplayabilir == true)
         {
-            rb.AddForce(Vector2.up * ziplamaGucu, ForceMode2D.Impulse);
-            ziplayabilir = false;
+            rb.AddForce(Vector2.up * ziplamaGucu, ForceMode2D.Impulse); // y ekseninde (yukarı doğru) güç uygular
+            // sürekli zıplamamak için iki değişkeni de false yapıyoruz...
+            ziplayabilir = false; 
             yerde = false;
         }
     }
 
-
+    // karakteri döndürmek için fonksiyon
     void karakteriDondur()
     {
         if (input < 0) transform.rotation = new Quaternion(0, 180, 0, 0);
         else if (input > 0) transform.rotation = Quaternion.identity;
     }
 
+    // zemin kontrolü
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("zemin")) yerde = true;
