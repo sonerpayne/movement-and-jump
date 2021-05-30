@@ -34,7 +34,8 @@ public class karakter : MonoBehaviour
     // karakteri döndürmek için fonksiyon
     void karakteriDondur()
     {
-        if (input < 0) transform.rotation = new Quaternion(0, 180, 0, 0);
+        // videodakinde new Quaternion yazıyor fakat kafanız karışmasın diye böyle de yapabilirsiniz, iki türlü de çalışır.
+        if (input < 0) transform.rotation = Quaternion.Euler(0,180,0);
         else if (input > 0) transform.rotation = Quaternion.identity;
     }
 
