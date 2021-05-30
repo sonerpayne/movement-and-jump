@@ -15,6 +15,7 @@ public class karakter : MonoBehaviour
     {
         input = Input.GetAxis("Horizontal"); // unity kütüphanesinden girdi alıyoruz. Durunca 0, sağa gidince 1, sola gidince -1.
         if (Input.GetKeyDown(KeyCode.Space) && yerde == true) ziplayabilir = true; // kullanıcıdan girdi alıyoruz
+    //  bunun yerine if (Input.GetButtonDown("Jump") && yerde == true) ziplayabilir = true; yazabilirsiniz.
     }
     private void FixedUpdate()
     {
